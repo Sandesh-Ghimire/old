@@ -16,14 +16,21 @@
         Your browser does not support the audio element.
     </audio>
     <!-- Navigation Menu -->
-    <div class="nav-menu">
-        <button class="nav-btn active" data-section="section1">Do You Love Me?</button>
-        <button class="nav-btn" data-section="section2">Love Letter</button>
-        <button class="nav-btn" data-section="section3">Be My Valentine?</button>
-        <button class="nav-btn" onclick="window.open('love-sprint/index.html', '_blank')">Love Sprint</button>
-
-        <button id="muteBtn" class="mute-btn" title="Mute/Unmute">🔊 Mute</button>
-    </div>
+    <nav class="navbar">
+        <div class="nav-brand">Valentine</div>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-menu" id="navMenu">
+            <button class="nav-btn active" data-section="section1">Do You Love Me?</button>
+            <button class="nav-btn" data-section="section2">Love Letter</button>
+            <button class="nav-btn" data-section="section3">Be My Valentine?</button>
+            <button class="nav-btn" onclick="window.open('love-sprint/index.html', '_blank')">Love Sprint</button>
+            <button id="muteBtn" class="mute-btn" title="Mute/Unmute">🔊 Mute</button>
+        </div>
+    </nav>
 
     <!-- Section 1: Do You Love Me -->
     <section id="section1" class="content-section active">

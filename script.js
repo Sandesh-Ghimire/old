@@ -24,6 +24,23 @@ muteBtn.addEventListener('click', () => {
     }
 });
 
+// ==================== Hamburger Menu ====================
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('navMenu');
+
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
+});
+
+// Close menu when a nav button is clicked
+document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+    });
+});
+
 // ==================== Navigation ====================
 document.querySelectorAll('.nav-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -58,6 +75,19 @@ const noBtn = document.querySelector(".js-no-btn-1");
 
 // Make No button escape on hover
 noBtn.addEventListener("mouseover", () => {
+    const maxX = questionContainer.offsetWidth - noBtn.offsetWidth;
+    const maxY = questionContainer.offsetHeight - noBtn.offsetHeight;
+    
+    const newX = Math.floor(Math.random() * maxX);
+    const newY = Math.floor(Math.random() * maxY);
+
+    noBtn.style.position = "absolute";
+    noBtn.style.left = `${newX}px`;
+    noBtn.style.top = `${newY}px`;
+});
+
+// Make No button escape on touch
+noBtn.addEventListener("touchstart", () => {
     const maxX = questionContainer.offsetWidth - noBtn.offsetWidth;
     const maxY = questionContainer.offsetHeight - noBtn.offsetHeight;
     
@@ -164,6 +194,19 @@ if (noButtonValentine) {
     
     // Make No button escape on hover (like Section 1)
     noButtonValentine.addEventListener("mouseover", () => {
+        const maxX = valentineContainer.offsetWidth - noButtonValentine.offsetWidth;
+        const maxY = valentineContainer.offsetHeight - noButtonValentine.offsetHeight;
+        
+        const newX = Math.floor(Math.random() * maxX);
+        const newY = Math.floor(Math.random() * maxY);
+
+        noButtonValentine.style.position = "absolute";
+        noButtonValentine.style.left = `${newX}px`;
+        noButtonValentine.style.top = `${newY}px`;
+    });
+    
+    // Make No button escape on touch (mobile)
+    noButtonValentine.addEventListener("touchstart", () => {
         const maxX = valentineContainer.offsetWidth - noButtonValentine.offsetWidth;
         const maxY = valentineContainer.offsetHeight - noButtonValentine.offsetHeight;
         
