@@ -12,11 +12,11 @@ let bestScore = localStorage.getItem('loveSprint_bestScore') || 0;
 
 // Heart player
 const heart = {
-    x: canvasWidth / 2 - 25,
-    y: canvasHeight - 80,
-    width: 50,
-    height: 50,
-    speed: 10
+    x: canvasWidth / 2 - 30,
+    y: canvasHeight - 100,
+    width: 60,
+    height: 60,
+    speed: 12
 };
 
 // Game objects
@@ -29,6 +29,25 @@ document.getElementById('bestScoreFinal').textContent = bestScore;
 
 // Start button
 document.getElementById('startBtn').addEventListener('click', startGame);
+
+// Arrow button controls
+const leftArrowBtn = document.getElementById('leftArrow');
+const rightArrowBtn = document.getElementById('rightArrow');
+
+let isPressingLeft = false;
+let isPressingRight = false;
+
+leftArrowBtn.addEventListener('mousedown', () => { isPressingLeft = true; });
+leftArrowBtn.addEventListener('mouseup', () => { isPressingLeft = false; });
+leftArrowBtn.addEventListener('mouseleave', () => { isPressingLeft = false; });
+leftArrowBtn.addEventListener('touchstart', (e) => { e.preventDefault(); isPressingLeft = true; });
+leftArrowBtn.addEventListener('touchend', (e) => { e.preventDefault(); isPressingLeft = false; });
+
+rightArrowBtn.addEventListener('mousedown', () => { isPressingRight = true; });
+rightArrowBtn.addEventListener('mouseup', () => { isPressingRight = false; });
+rightArrowBtn.addEventListener('mouseleave', () => { isPressingRight = false; });
+rightArrowBtn.addEventListener('touchstart', (e) => { e.preventDefault(); isPressingRight = true; });
+rightArrowBtn.addEventListener('touchend', (e) => { e.preventDefault(); isPressingRight = false; });
 
 // Keyboard controls (for desktop)
 const keys = {};
@@ -81,12 +100,12 @@ document.addEventListener('mousemove', e => {
     }
 });
 
-// Keyboard controls
+// Keyboard and button controls
 function handleKeyboardInput() {
-    if (keys['ArrowLeft']) {
+    if (keys['ArrowLeft'] || isPressingLeft) {
         heart.x = Math.max(heart.x - heart.speed, 0);
     }
-    if (keys['ArrowRight']) {
+    if (keys['ArrowRight'] || isPressingRight) {
         heart.x = Math.min(heart.x + heart.speed, canvasWidth - heart.width);
     }
 }
@@ -98,7 +117,7 @@ function startGame() {
     score = 0;
     gifts.length = 0;
     obstacles.length = 0;
-    heart.x = canvasWidth / 2 - 25;
+    heart.x = canvasWidth / 2 - 30;
     
     document.getElementById('startBtn').classList.add('hidden');
     document.getElementById('restartBtn').classList.remove('hidden');
@@ -191,68 +210,77 @@ function update() {
     }
 }
 
-// Draw penguin using canvas
+// Draw penguin using canvas - Enhanced and larger
 function drawPenguin(x, y, size) {
     const s = size / 2;
     
-    // Body (black)
+    // Body (black) - larger
     ctx.fillStyle = '#1a1a1a';
     ctx.beginPath();
-    ctx.ellipse(x, y, s * 0.7, s, 0, 0, Math.PI * 2);
+    ctx.ellipse(x, y, s * 0.8, s * 1.1, 0, 0, Math.PI * 2);
     ctx.fill();
     
-    // Belly (white)
+    // Belly (white) - larger
     ctx.fillStyle = '#ffffff';
     ctx.beginPath();
-    ctx.ellipse(x, y + s * 0.2, s * 0.4, s * 0.6, 0, 0, Math.PI * 2);
+    ctx.ellipse(x, y + s * 0.2, s * 0.5, s * 0.7, 0, 0, Math.PI * 2);
     ctx.fill();
     
-    // Head (black)
+    // Head (black) - larger
     ctx.fillStyle = '#1a1a1a';
     ctx.beginPath();
-    ctx.arc(x, y - s * 0.5, s * 0.5, 0, Math.PI * 2);
+    ctx.arc(x, y - s * 0.6, s * 0.6, 0, Math.PI * 2);
     ctx.fill();
     
-    // Left eye (white)
-    ctx.fillStyle = '#ffffff';
+    // Cheeks (light pink)
+    ctx.fillStyle = '#ffb3ba';
     ctx.beginPath();
-    ctx.arc(x - s * 0.2, y - s * 0.6, s * 0.15, 0, Math.PI * 2);
+    ctx.arc(x - s * 0.35, y - s * 0.5, s * 0.2, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(x + s * 0.35, y - s * 0.5, s * 0.2, 0, Math.PI * 2);
     ctx.fill();
     
-    // Right eye (white)
+    // Left eye (white) - larger
     ctx.fillStyle = '#ffffff';
     ctx.beginPath();
-    ctx.arc(x + s * 0.2, y - s * 0.6, s * 0.15, 0, Math.PI * 2);
+    ctx.arc(x - s * 0.25, y - s * 0.75, s * 0.18, 0, Math.PI * 2);
+    ctx.fill();
+    
+    // Right eye (white) - larger
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.arc(x + s * 0.25, y - s * 0.75, s * 0.18, 0, Math.PI * 2);
     ctx.fill();
     
     // Left pupil (black)
     ctx.fillStyle = '#000000';
     ctx.beginPath();
-    ctx.arc(x - s * 0.2, y - s * 0.6, s * 0.08, 0, Math.PI * 2);
+    ctx.arc(x - s * 0.25, y - s * 0.75, s * 0.1, 0, Math.PI * 2);
     ctx.fill();
     
     // Right pupil (black)
     ctx.fillStyle = '#000000';
     ctx.beginPath();
-    ctx.arc(x + s * 0.2, y - s * 0.6, s * 0.08, 0, Math.PI * 2);
+    ctx.arc(x + s * 0.25, y - s * 0.75, s * 0.1, 0, Math.PI * 2);
     ctx.fill();
     
-    // Beak (orange)
+    // Beak (orange) - larger
     ctx.fillStyle = '#ff8c00';
     ctx.beginPath();
-    ctx.moveTo(x - s * 0.15, y - s * 0.35);
-    ctx.lineTo(x + s * 0.15, y - s * 0.35);
-    ctx.lineTo(x, y - s * 0.2);
+    ctx.moveTo(x - s * 0.2, y - s * 0.4);
+    ctx.lineTo(x + s * 0.2, y - s * 0.4);
+    ctx.lineTo(x, y - s * 0.15);
     ctx.closePath();
     ctx.fill();
     
-    // Left foot (orange)
+    // Left foot (orange) - larger
     ctx.fillStyle = '#ff8c00';
-    ctx.fillRect(x - s * 0.3, y + s * 0.8, s * 0.2, s * 0.25);
+    ctx.fillRect(x - s * 0.35, y + s * 0.9, s * 0.25, s * 0.3);
     
-    // Right foot (orange)
+    // Right foot (orange) - larger
     ctx.fillStyle = '#ff8c00';
-    ctx.fillRect(x + s * 0.1, y + s * 0.8, s * 0.2, s * 0.25);
+    ctx.fillRect(x + s * 0.1, y + s * 0.9, s * 0.25, s * 0.3);
 }
 
 // Draw game
@@ -267,8 +295,8 @@ function draw() {
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, canvasWidth, canvasHeight);
     
-    // Draw penguin (player)
-    drawPenguin(heart.x + heart.width / 2, heart.y + heart.height / 2, 40);
+    // Draw penguin (player) - larger size
+    drawPenguin(heart.x + heart.width / 2, heart.y + heart.height / 2, 60);
     
     // Draw gifts (yellow stars)
     gifts.forEach(gift => {
