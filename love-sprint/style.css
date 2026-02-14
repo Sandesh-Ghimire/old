@@ -100,10 +100,11 @@ h1 {
 
 .controls {
     display: flex;
-    gap: 200px;
-    justify-content: center;
+    gap: 15px;
+    justify-content: space-between;
     width: 100%;
     margin: 5px 0;
+    padding: 0 10px;
 }
 
 .arrow-btn {
@@ -311,7 +312,9 @@ h1 {
     }
 
     .controls {
+        justify-content: space-between;
         gap: 12px;
+        padding: 0 10px;
     }
 
     .arrow-btn {
@@ -387,8 +390,10 @@ h1 {
     }
 
     .controls {
+        justify-content: space-between;
         gap: 10px;
         margin: 3px 0;
+        padding: 0 8px;
     }
 
     .arrow-btn {
@@ -475,8 +480,10 @@ h1 {
     }
 
     .controls {
-        gap: 10px;
+        justify-content: space-between;
+        gap: 12px;
         margin: 3px 0;
+        padding: 0 8px;
     }
 
     .arrow-btn {
@@ -576,8 +583,10 @@ h1 {
     }
 
     .controls {
+        justify-content: space-between;
         gap: 8px;
         margin: 2px 0;
+        padding: 0 6px;
     }
 
     .arrow-btn {
